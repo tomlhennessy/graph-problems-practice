@@ -1,20 +1,28 @@
-function getNeighbors(row, col, graph) {
+function getNeighbors(row, col, matrix) {
+  const neighbors = [];
 
   // Check top
-
+  if (row > 0 && matrix[row - 1][col] === 1) {
+    neighbors.push([row - 1, col]);
+  }
   // Check bottom
-
+  if (row < matrix.length - 1 && matrix[row + 1][col] === 1) {
+    neighbors.push([row + 1, col]);
+  }
   // Check left
-
+  if (col > 0 && matrix[row][col - 1] === 1) {
+    neighbors.push([row, col - 1]);
+  }
   // Check right
-
+  if (col < matrix[0].length - 1 && matrix[row][col + 1] === 1) {
+    neighbors.push([row, col + 1]);
+  }
   // Return neighbors
-
-  // Your code here
+  return neighbors;
 }
 
 
-function islandSize(row, col, graph) {
+function islandSize(row, col, matrix) {
 
   // Create a visited set to store visited nodes
 
