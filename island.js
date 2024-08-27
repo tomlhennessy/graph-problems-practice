@@ -23,29 +23,44 @@ function getNeighbors(row, col, matrix) {
 
 
 function islandSize(row, col, matrix) {
+  // create a visited set to store visited nodes
+  const visited = new Set();
 
-  // Create a visited set to store visited nodes
+  // create a stack, put the starting node in the stack
+  const stack = [[row, col]];
 
-  // Create a stack, put the starting node in the stack
+  // put the stringified starting node in visited
+  visited.add([row, col].toString());
 
-  // Put the stringified starting node in visited
+  // initialise to 0
+  let size = 0;
 
-  // Initialize size to 0
+  // while the stack is not empty
+  while (stack.length > 0) {
+    // pop the first node
+    const [currentRow, currentCol] = stack.pop();
 
-  // While the stack is not empty,
+    // increment the size (do the ting!)
+    size++;
 
-    // Pop the first node
+    // get all unvisited neighbors
+    const neighbors = getNeighbors(currentRow, currentCol, matrix);
 
-    // DO THE THING (increment size by 1)
+    for (const neighbor of neighbors) {
+      const neighborKey = neighbor.toString();
+      // if the neighbor hasn't been visited
+      if (!visited.has(neighborKey)) {
+        // mark it as visited and push it onto the stack
+        visited.add(neighborKey);
+        stack.push(neighbor);
+      }
+    }
 
-    // Then push all the UNVISITED neighbors on top of the stack
-    // and mark them as visited
-    // HINT: This is what your helper function `getNeighbors` is for
-    // HINT: Remember, you're storing your visited nodes as strings!
+    //
+  }
 
-  // return size
-
-  // Your code here
+  // return the size of the island
+  return size;
 }
 
 module.exports = [getNeighbors, islandSize];
